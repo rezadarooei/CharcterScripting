@@ -75,3 +75,14 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+Content/StarterContent/
+Content/AnimStarterPack/
+Content/Mannequin/
+Content/ThirdPerson/
+Content/Geometry/
+CharcterScripting.uproject
+Config/DefaultInput.ini
+Config/DefaultGame.ini
+Config/DefaultEngine.ini
+Config/DefaultEditorPerProjectUserSettings.ini
+Config/DefaultEditor.ini
