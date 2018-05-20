@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "MyCharacter.h"
-
+#include "Runtime/Engine/Classes/Components/InputComponent.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -18,15 +18,6 @@ void AMyCharacter::BeginPlay()
 	
 }
 
-void AMyCharacter::StartSpring()
-{
-	GLog->Log("StartSprint")
-}
-
-void AMyCharacter::EndSpring()
-{
-	GLog->Log("EndSprint")
-}
 
 // Called every frame
 void AMyCharacter::Tick(float DeltaTime)
@@ -39,9 +30,25 @@ void AMyCharacter::Tick(float DeltaTime)
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Sprint", this, IE_Pressed, &AMyCharacter::StartSpring);
-	PlayerInputComponent->BindAction("Sprint", this, IE_Released, &AMyCharacter::EndSpring);
-);
+	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AMyCharacter::StartSpring);
+	PlayerInputComponent->BindAction("Sprint",  IE_Released, this, &AMyCharacter::EndSpring);
+	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &AMyCharacter::Reload);
 
 }
 
+void AMyCharacter::StartSpring()
+{
+	GLog->Log("StartSprint");
+}
+
+void AMyCharacter::EndSpring()
+{
+	GLog->Log("EndSprint");
+}
+
+void AMyCharacter::Reload()
+{
+	if (ReloadMontage) {
+		PlayAnimMontage(ReloadMontage);
+	}
+}
