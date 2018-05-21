@@ -26,8 +26,8 @@ protected:
 	void Reload();
 	void MoveFoward(float value);
 	void MoveRight(float value);
-
-
+	void Toggle();
+	bool bToggleIsOn;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -37,5 +37,6 @@ public:
 	UPROPERTY(EditDefaultsOnly,Category="Animation")
 	UAnimMontage* ReloadMontage;
 	UCameraComponent* CameraComp;
+	UPROPERTY(EditDefaultsOnly)
 	USpringArmComponent* SpringArm;
 };

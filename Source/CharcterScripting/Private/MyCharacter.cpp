@@ -42,6 +42,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &AMyCharacter::Reload);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMyCharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AMyCharacter::StopJumping);
+	PlayerInputComponent->BindAction("Toggle", IE_Pressed, this, &AMyCharacter::Toggle);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveFoward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
@@ -77,4 +78,19 @@ void AMyCharacter::MoveFoward(float value)
 void AMyCharacter::MoveRight(float value)
 {
 	AddMovementInput(GetActorRightVector(), value);
+}
+
+void AMyCharacter::Toggle()
+{
+	bToggleIsOn = !bToggleIsOn;
+	if (bToggleIsOn) {
+		SpringArm->TargetArmLength = 0.f;
+		GetMesh()->SetVisibility(false);
+	}
+	else
+	{
+		SpringArm->TargetArmLength = 300.f;
+		GetMesh()->SetVisibility(true);
+
+	}
 }
