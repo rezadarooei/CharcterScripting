@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "MyCharacter.generated.h"
 
+class UCameraComponent;
+class USpringArmComponent;
+
 UCLASS()
 class CHARCTERSCRIPTING_API AMyCharacter : public ACharacter
 {
@@ -21,6 +24,9 @@ protected:
 	void StartSpring();
 	void EndSpring();
 	void Reload();
+	void MoveFoward(float value);
+	void MoveRight(float value);
+
 
 public:	
 	// Called every frame
@@ -30,5 +36,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	UPROPERTY(EditDefaultsOnly,Category="Animation")
 	UAnimMontage* ReloadMontage;
-	
+	UCameraComponent* CameraComp;
+	USpringArmComponent* SpringArm;
 };
