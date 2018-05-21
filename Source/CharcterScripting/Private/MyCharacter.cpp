@@ -4,6 +4,7 @@
 #include "Runtime/Engine/Classes/Components/InputComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 // Sets default values
 AMyCharacter::AMyCharacter()
 {
@@ -11,6 +12,9 @@ AMyCharacter::AMyCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	CameraComp = CreateDefaultSubobject<UCameraComponent>("CameraCompnent");
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SPringArm");
+	FirstPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>("FirstPersonMesh");
+	FirstPersonMesh->SetVisibility(false);
+	
 	SpringArm->AttachTo(RootComponent);
 	CameraComp->AttachTo(SpringArm,USpringArmComponent::SocketName);
 	SpringArm->TargetArmLength = 300.f;
@@ -22,7 +26,8 @@ AMyCharacter::AMyCharacter()
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	FirstPersonMesh->AttachToComponent(CameraComp, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	FirstPersonMesh->SetRelativeLocation(FVector(0.f, -15.f, -155.f));
 }
 
 
@@ -55,11 +60,14 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 void AMyCharacter::StartSpring()
 {
+	//GetCharacterMovement()->MaxWalkSpeed ()= 900.f;
 	GLog->Log("StartSprint");
 }
 
 void AMyCharacter::EndSpring()
 {
+	//GetCharacterMovement()->MaxWalkSpeed() = 600.f;
+
 	GLog->Log("EndSprint");
 }
 
@@ -86,11 +94,13 @@ void AMyCharacter::Toggle()
 	if (bToggleIsOn) {
 		SpringArm->TargetArmLength = 0.f;
 		GetMesh()->SetVisibility(false);
+		FirstPersonMesh->SetVisibility(true);
 	}
 	else
 	{
 		SpringArm->TargetArmLength = 300.f;
 		GetMesh()->SetVisibility(true);
+		FirstPersonMesh->SetVisibility(false);
 
 	}
 }

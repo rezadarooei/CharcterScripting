@@ -39,4 +39,7 @@ public:
 	UCameraComponent* CameraComp;
 	UPROPERTY(EditDefaultsOnly)
 	USpringArmComponent* SpringArm;
+	UPROPERTY(EditDefaultsOnly)
+
+	USkeletalMeshComponent* FirstPersonMesh;
 };
