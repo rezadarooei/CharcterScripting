@@ -40,6 +40,9 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AMyCharacter::StartSpring);
 	PlayerInputComponent->BindAction("Sprint",  IE_Released, this, &AMyCharacter::EndSpring);
 	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &AMyCharacter::Reload);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMyCharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AMyCharacter::StopJumping);
+
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveFoward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
 	PlayerInputComponent->BindAxis("LookUP", this, &AMyCharacter::AddControllerPitchInput);
