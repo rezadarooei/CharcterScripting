@@ -15,7 +15,7 @@ UCLASS()
 class CHARCTERSCRIPTING_API ABotAIController : public AAIController
 {
 	GENERATED_BODY()
-public:
+protected:
 	ABotAIController();
 	virtual void Possess(APawn* InPawn) override;
 protected:
@@ -26,14 +26,11 @@ protected:
 	UBehaviorTreeComponent* bahaviorTreeComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	UBehaviorTree* BahaviorTree;
 
-		UBehaviorTree* BahaviorTree;
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
-
 	UPawnSensingComponent* PawnSensig;
 
-	
-	
 	UFUNCTION()
 		void OnSeenPawn(class APawn* SensedPawn);
 
